@@ -9,7 +9,7 @@ echo 'Login incorret'
 echo
 echo 'Debian GNU/Linux 8 jessie tty1'			#Fim da função erou
 
-function menu()				#Função menu onde está o login 
+function menu()					#Função menu onde está o login 
 {
 echo
 echo -n 'jessie login: '
@@ -33,10 +33,10 @@ if [ $USER == vagrant ]					#Script para o login
 then
 	if [ $PASS == vagrant ]	#Necessário fazer mais um if caso queira que reconheça ambos
 	then
-	acertou
+	acertou				#Esta é uma funcão que está na linha 20
 	else
 	echo
-	erou
+	erou				#Esta é uma função que está na linha 3
 	menu
 	fi
 else
