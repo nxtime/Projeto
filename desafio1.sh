@@ -1,6 +1,8 @@
 #!/bin/bash
 clear
 
+while : ; do
+
 function novamente(){
 echo
 echo 'Você deseja tentar novamente?'
@@ -99,3 +101,4 @@ invalida
 fi
 }
 		menin			#chama a função menin
+done
