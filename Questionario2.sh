@@ -335,19 +335,60 @@ fi
 indisponivel(){
 	dialog --msgbox 'Desculpe no momento está indisponível' 7 41
 }
-e1(){
-	vim
-	if [ $? != 0 ]; then
-		dialog --title "ERRO" --yesno "\nPercebi que você não tem o programa, deseja instalá-lo?" 0 0
+instalacao(){
+	if [ $ERRO != 0 ]; then
+		dialog --stdout --title "WARNING!!!" --msgbox "\nAntes de proseguir por favor verifique se tem acesso root e/ou a internet." 0 0
+		dialog --stdout --title "ERRO" --yesno "\nDetectei que você não tem o programa, deseja instalá-lo?" 0 0
 		if [ $? == 0 ]; then
-			$(apt-get update)
-			$(apt-get install vim)
+			$(apt-get install $PROGRAMA)
+			espera
+			dialog --stdout --title "$PROGRAMA" --yesno "O $PROGRAMA foi instalado, deseja executálo?" 0 0
+			if [ $? == 0 ]; then
+				$PROGRAMA
+				espera
+				editortexto
+			else
+				espera
+				editortexto
+			fi
 		else
+			espera
 			editortexto
 		fi
 	else
+		espera
 		editortexto
 	fi
+}
+e5(){
+PROGRAMA=geany
+$PROGRAMA
+ERRO=$?
+[ $ERRO != 0 ] && instalacao || editortexto
+}
+e4(){
+PROGRAMA=emacs
+$PROGRAMA
+ERRO=$?
+[ $ERRO != 0 ] && instalacao || editortexto
+}
+e3(){
+PROGRAMA=joe
+$PROGRAMA
+ERRO=$?
+[ $ERRO != 0 ] && instalacao || editortexto
+}
+e2(){
+PROGRAMA=nano
+$PROGRAMA
+ERRO=$?
+[ $ERRO != 0 ] && instalacao || editortexto
+}
+e1(){
+PROGRAMA=vim
+$PROGRAMA
+ERRO=$?
+[ $ERRO != 0 ] && instalacao || editortexto
 }
 editortexto(){
 OPCAO2=$( dialog --stdout --title 'Editores de texto v1.0' --menu "Selecione um dos editores abaixo:" 0 0 0 \
